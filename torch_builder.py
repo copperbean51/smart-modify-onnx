@@ -42,6 +42,9 @@ class ONNXToTorch(nn.Module):
             elif op_type == "GatherElements":
                 self.custom_operations[outputs[0]] = ("gather", inputs)
 
+            else:
+                raise ValueError(f"Unsupported operator: {op_type}")
+
         return nn.Sequential(*layers)
 
     def forward(self, x):
